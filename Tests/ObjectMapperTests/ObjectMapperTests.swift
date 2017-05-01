@@ -54,9 +54,10 @@ class ObjectMapperTests: XCTestCase {
         let drinker = true
         let smoker = false
 		let sex: Sex = .Female
+		let timestamp: Int64 = 1493629236429
         let subUserJSON = "{\"identifier\" : \"user8723\", \"drinker\" : true, \"age\": 17, \"username\" : \"sub user\" }"
         
-        let userJSONString = "{\"username\":\"\(username)\",\"identifier\":\"\(identifier)\",\"photoCount\":\(photoCount),\"age\":\(age),\"drinker\":\(drinker),\"smoker\":\(smoker), \"sex\":\"\(sex.rawValue)\", \"arr\":[ \"bla\", true, 42 ], \"dict\":{ \"key1\" : \"value1\", \"key2\" : false, \"key3\" : 142 }, \"arrOpt\":[ \"bla\", true, 42 ], \"dictOpt\":{ \"key1\" : \"value1\", \"key2\" : false, \"key3\" : 142 }, \"weight\": \(weight), \"float\": \(float), \"friend\": \(subUserJSON), \"friendDictionary\":{ \"bestFriend\": \(subUserJSON)}}"
+        let userJSONString = "{\"timestamp\":\(timestamp), \"username\":\"\(username)\",\"identifier\":\"\(identifier)\",\"photoCount\":\(photoCount),\"age\":\(age),\"drinker\":\(drinker),\"smoker\":\(smoker), \"sex\":\"\(sex.rawValue)\", \"arr\":[ \"bla\", true, 42 ], \"dict\":{ \"key1\" : \"value1\", \"key2\" : false, \"key3\" : 142 }, \"arrOpt\":[ \"bla\", true, 42 ], \"dictOpt\":{ \"key1\" : \"value1\", \"key2\" : false, \"key3\" : 142 }, \"weight\": \(weight), \"float\": \(float), \"friend\": \(subUserJSON), \"friendDictionary\":{ \"bestFriend\": \(subUserJSON)}}"
 
 		let user = userMapper.map(JSONString: userJSONString)!
 		
@@ -70,6 +71,7 @@ class ObjectMapperTests: XCTestCase {
 		XCTAssertEqual(drinker, user.drinker)
 		XCTAssertEqual(smoker, user.smoker)
 		XCTAssertEqual(sex, user.sex)
+		XCTAssertEqual(timestamp, user.timestamp)
 
 		//print(Mapper().toJSONString(user, prettyPrint: true))
     }
@@ -543,7 +545,8 @@ enum Sex: String {
 }
 
 class User: Mappable {
-    
+	
+	var timestamp: Int64?
     var username: String = ""
     var identifier: String?
     var photoCount: Int = 0
@@ -571,6 +574,7 @@ class User: Mappable {
 	}
 	
 	func mapping(map: Map) {
+		timestamp		 <- map["timestamp"]
 		username         <- map["username"]
 		identifier       <- map["identifier"]
 		photoCount       <- map["photoCount"]

@@ -93,16 +93,18 @@ private func toSignedInteger<T: SignedInteger>(_ value: Any?) -> T? {
 	guard let value = value else { return nil }
 	let max: IntMax
 	switch value {
-	case let x as Int: max = .init(x)
-	case let x as Int8: max = .init(x)
-	case let x as Int16: max = .init(x)
-	case let x as Int32: max = .init(x)
 	case let x as Int64: max = .init(x)
-	case let x as UInt: max = .init(x)
-	case let x as UInt8: max = .init(x)
-	case let x as UInt16: max = .init(x)
-	case let x as UInt32: max = .init(x)
+	case let x as Int32: max = .init(x)
+	case let x as Int16: max = .init(x)
+	case let x as Int8: max = .init(x)
+	case let x as Int: max = .init(x)
+	
 	case let x as UInt64: max = .init(x)
+	case let x as UInt32: max = .init(x)
+	case let x as UInt16: max = .init(x)
+	case let x as UInt8: max = .init(x)
+	case let x as UInt: max = .init(x)
+
 	default: return nil
 	}
 	return T.init(max)
@@ -113,16 +115,17 @@ private func toUnsignedInteger<T: UnsignedInteger>(_ value: Any?) -> T? {
 	guard let value = value else { return nil }
 	let max: UIntMax
 	switch value {
-	case let x as Int: max = .init(x)
-	case let x as Int8: max = .init(x)
-	case let x as Int16: max = .init(x)
-	case let x as Int32: max = .init(x)
 	case let x as Int64: max = .init(x)
-	case let x as UInt: max = .init(x)
-	case let x as UInt8: max = .init(x)
-	case let x as UInt16: max = .init(x)
-	case let x as UInt32: max = .init(x)
+	case let x as Int32: max = .init(x)
+	case let x as Int16: max = .init(x)
+	case let x as Int8: max = .init(x)
+	case let x as Int: max = .init(x)
+		
 	case let x as UInt64: max = .init(x)
+	case let x as UInt32: max = .init(x)
+	case let x as UInt16: max = .init(x)
+	case let x as UInt8: max = .init(x)
+	case let x as UInt: max = .init(x)
 	default: return nil
 	}
 	return T.init(max)
